@@ -176,9 +176,9 @@ from .sibling import example
 
 <h2 id="5">表达式和语句中的空格<h2/>
 
-<h3 id="5.1">心理藏的小烦恼</h3>
+<h3 id="5.1">在以下场景避免不必要的空格</h3>
 
-在以下场景避免不必要的空格
+推荐示例
 
 ```Python
 是： spam(ham[1], {eggs: 2})
@@ -301,28 +301,7 @@ Rather not:
     do_one(); do_two(); do_three()
 ```
 
-下面这种丑就不多说了：
 
-```python
-Rather not:
-
-    if foo == 'blah': do_blah_thing()
-    for x in lst: total += x
-    while t < 10: t = delay()
-
-Definitely not:
-
-    if foo == 'blah': do_blah_thing()
-    else: do_non_blah_thing()
-
-    try: something()
-    finally: cleanup()
-
-    do_one(); do_two(); do_three(long, argument,
-                                 list, like, this)
-
-    if foo == 'blah': one(); two(); three()
-```
 
 <h2 id="6">何时使用逗号结尾</h2>
 
@@ -337,26 +316,11 @@ OK, but confusing:
 
     FILES = 'setup.cfg',
 ```
-当使用版本控制系统时，一组希望后续扩展的值/参数/改善的条目使用以下形式：
-```python
-是：
 
-    FILES = [
-        'setup.cfg',
-        'tox.ini',
-        ]
-    initialize(FILES,
-               error=True,
-               )
-否：
-
-    FILES = ['setup.cfg', 'tox.ini',]
-    initialize(FILES, error=True,)
-```
 
 <h2 id="7">注释</h2>
 
-糟糕的注释不如没有注释，一定要用 English 注释。
+糟糕的注释不如没有注释
 
 <h3 id="7.1">块注释</h3>
 
@@ -427,9 +391,7 @@ Optional plotz says to frobnicate the bizbaz first.
 ```python
 Tkinter.Toplevel(master, class_='ClassName')
 ```
-* \_\_double\_leading_underscore : 当对类属性命名时，调用名改变 (在 FooBar 类内，\_\_boo 变成了 \_FooBar\_\_boo；后面有介绍)
 
-* \_\_double\_leading\_and\_trailing\_underscore\_\_ : "魔幻的" 对象或属性，只生存于用户控制的命名空间。例如， \_\_init\_\_ ，\_\_import\_\_ 或 \_\_file\_\_ 。千万不要臆造这种命名； only use them as documented.
 
 <h3 id="8.3">规定性: 命名习惯</h3>
 
@@ -475,58 +437,10 @@ KT_contra = TypeVar('KT_contra', contravariant=True)
 设计为通过 <code>from M import *</code> 导入的类应该使用 \_\_all\_\_ 机制避免导出全局变量，或者可以使用老式的习惯，给这些全局变量名加上下划线作为前缀(表示这是非公有变量)。
 
 
-<h4 id="8.3.7">函数名</h4>
-
-例如，<code>func</code> or <code>func_write_to_file</code>
-
-为了向后兼容性，也可以使用 mixedCase 式命名风格。
-
-<h4 id="8.3.8">函数和方法参数</h4>
-
-实例方法第一个入参一定要是 self。
-
-类方法第一个入参一定要是 cls。
-
-如果函数入参名和保留关键字冲突，则后缀下划线好过缩写或者糟糕的拼写。
-
-例如，class_ 好过 clss。
-
-<h4 id="8.3.9">方法名和实例变量</h4>
-
-使用函数命名风格即可。如果希望是私有方法或实例变量，则前缀下划线。
-
-为避免和子类的命名冲突，请使用双下划线前缀命名。
-
-如果类 Foo 有一个属性变量 __a，那么通过 Foo.__a 是不能被访问的。当然，固执的用户仍然可以通过 Foo._Foo__a 访问），一般来说，双下划线前缀只是在避免子类属性命名冲突的场景下使用。
-
-<h4 id="8.3.10">常量</h4>
+<h4 id="8.3.7">常量</h4>
 
 常量一般定义在模块级别。命名风格如：MAX_OVERFLOW 或 TOTAL 。
 
-<h4 id="8.3.11">继承设计</h4>
-
-经常去思考类方法和实例变量（属性）应该是公有的还是非公有的（严格意义上，python 没有私有变量）。如果不确定，那就设置成非公有的。
-
-另一类属性类别是子类 API 的一部分，（在其他语言中称"protected"）。有些类天生就是被设计为用来继承的，当设计这种类时，注意哪些属性是公有的，哪些是子类 API 的一部分，哪些是只在基类中使用的。
-
-神谕的指导：
-
-* 公有实例变量不应该有前缀下划线。
-* 公有实例变量和保留关键字冲突时，变量名加前缀下划线避免，这比使用缩写和其他糟糕的拼写要好（除了 'cls'，当一个变量或入参确定是一个类，特别是作为类方法的第一个入参时，'cls' 更惹人喜爱）。
-* 对于简单的公有数据属性，不要使用复杂的存取函数，直接暴露属性名。
-* 如果设计继承基类时，不希望子类访问的属性加双下划线前缀。
-
-<h4 id="8.3.12">公共和内部接口</h4>
-
-文档说明的接口一般认为是公共接口，除非文档明确声明为临时或内部接口（为了兼容性等其他原因），所有非文档说明的接口一般为内部接口。
-
-模块应该使用 \_\_all\_\_ 属性明确声明公共 API 名，如果 \_\_all\_\_ 为空，则表明模块没有公共 API。
-
-尽管使用了 \_\_all\_\_ 属性，内部接口（packages, modules, classes, functions, attributes or other names）仍然需要使用前缀下划线。
-
-如果包含的任何一个命名空间（package, module or class）是内部的，那么这个接口也被认为是内部接口。
-
-导入名应该总是被视为实现细节。其他导入模块一定不能依赖对此导入名的间接访问，除非它们是包含模块 API 的显式文档说明的部分，例如 os.path 或者一个 package 向子模块暴露函数的 \_\_init\_\_ 模块。
 
 <h3 id="9">编码建议</h3>
 
@@ -545,7 +459,8 @@ KT_contra = TypeVar('KT_contra', contravariant=True)
 
     if not foo is None:
 ```
-* 当使用 rich comparisons 实现排序操作时，最好是实现所有六种操作(\_\_eq\_\_,\_\_ne\_\_, \_\_lt\_\_, \_\_le\_\_, \_\_gt\_\_, \_\_ge\_\_)而不要依赖其他的代码去单独实现某一类比较。为了减少劳动，functools.total_ordering() decorator 提供了一个生成缺失比较方法的工具。
+
+
 
 * 使用 def 语句而不要使用赋值语句去直接绑定一个 lambda 表达式到标识符上：
 
@@ -563,41 +478,6 @@ KT_contra = TypeVar('KT_contra', contravariant=True)
 
 * 捕获的异常要说明 "错误出在哪里了 ？" 而不是仅仅说明 "哎呀！出问题了！"。
 
-* 正确使用异常链接。在 Python 3 中，应该使用 "raise X from Y" 来表示显式替换并且不会丢失原始追溯。
-
-当有意替换一个内部异常(Python 2: "raise X", Python 3.3+: raise X from Non)时，请确保将相关的详细信息转移到新的异常(例如，将 KeyError 转换为 AttributeError 时保留属性名称，或将原始异常的文本嵌入到新的异常消息中)。
-
-* 当在 Python 2 中抛出异常时，使用 <code>raise ValueError('message')</code> 而不是老式的 <code>raise ValueError, 'message'</code>，后者已经在 Python 3 中废弃。由于使用了括号，可以避免行连续符的使用。
-
-* 当捕获异常时，尽可能提及具体的异常而不是使用一个赤裸裸的 except 子句。一个裸露的 except: 子句将捕获 SystemExit 和 KeyboardInterrupt 异常，这样的话就难于使用 control-c 中断程序，并可能掩盖其他问题。如果想要捕获标志程序错误的所有异常的话，用 except Exception:(裸露的 except 子句等同于 except BaseException:)：
-
-```python
-try:
-    import platform_specific_module
-except ImportError:
-    platform_specific_module = None
-```
-
-<blockquote>
-
-一个很好的经验法则是将裸露的 except 子句仅用于以下两种情况：  
-
-1、If the exception handler will be printing out or logging the traceback; at least the user will be aware that an error has occurred.
-
-2、If the code needs to do some cleanup work, but then lets the exception propagate upwards with raise . try...finally can be a better way to handle this case.
-
-</blockquote>
-
-* 当对捕获的异常重命名时，使用 2.6 版本引入的语法：
-
-```python
-try:
-    process_data()
-except Exception as exc:
-    raise DataProcessingFailedError(str(exc))
-```
-
-* 当捕获操作系统错误时，相对于内置的 errno 值，最好是使用 Python 3.3 中介绍的显式异常层次结构。
 
 * 对于所有的 try/except 子句，将 try 子句限制为必需的绝对最小代码量避免隐藏 bug：
 
@@ -673,20 +553,6 @@ except Exception as exc:
 否： if foo[:3] == 'bar':
 ```
 
-* 对象类型比较应该使用isinstance() 而不是直接比较：
-
-```python
-是： if isinstance(obj, int):
-否： if type(obj) is type(1):
-```
-
-当检查一个对象是否为字符串时，一定要注意这个对象也可能是 unicode 字符串！在 Python 2 中，string 和 unicode 拥有一个公共基类 basestring，因此可以这么的：
-
-```python
-if isinstance(obj, basestring):
-```
-
-在 Python 3 中，unicode 和 basestring 已然不复存在(there's only str)，并且 bytes object 也不再视为一种 string 了，而是一个整形序列。
 
 * 对于序列（字符串，列表，元组）的判空操作：
 ```python
