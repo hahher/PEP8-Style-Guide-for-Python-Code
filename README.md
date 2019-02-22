@@ -1,4 +1,4 @@
-# PEP 8 - Python 代码风格指南
+# Python 代码风格指南
 
 
 <h2 id="3">代码布局</h2>
@@ -160,13 +160,6 @@ from mypkg import sibling
 from mypkg.sibling import example
 ```
 
-在包结构比较复杂时，可以使用相对导入。
-
-```Python
-from . import sibling
-from .sibling import example
-```
-
 
 <h2 id="4">字符串引号</h2>
 
@@ -256,7 +249,7 @@ from .sibling import example
     def complex(real, imag = 0.0):
         return magic(r = real, i = imag)
 ```
-函数注解的场景：
+函数注解的示例：
 
 ```python
 是：
