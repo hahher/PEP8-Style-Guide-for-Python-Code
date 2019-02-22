@@ -85,9 +85,9 @@ result = some_function_that_takes_arguments(
 )
 ```
 
-<h3 id="3.2">A 罩杯还是 E 罩杯 ？</h3>
+<h3 id="3.2"> tab 和 space </h3>
 
-A 罩杯。
+
 
 Python 3 不允许 tab 和 space 混用，同时混用了 tab 和 space 的 Python 2 代码应该被转换为仅使用 space。  
 
@@ -95,9 +95,6 @@ Python 3 不允许 tab 和 space 混用，同时混用了 tab 和 space 的 Pyth
 
 将所有行限制为最多79个字符。
 
-对于具有较少结构限制（文档字符串或注释）的长文本块，行长度应限制为72个字符。
-
-当然了，不要问为啥非得是 79,72。我们要兼顾非洲大陆人民的生活。代码是全世界的。
 
 反斜杠有时可能仍然要用。 例如，又多又长的 with - 语句不能使用隐式连接，这时反斜杠是可以接受的：
 
@@ -111,7 +108,7 @@ assert 语句也是如此。
 
 <h3 id="3.4">在二元运算符之前还是之后断行?</h3>
 
-算法和程序设计技术先驱，计算机排版系统 TEX 和 METAFONT 的发明者 Donald Knuth，推荐使用以下形式：
+推荐使用以下形式：
 
 ```Python
 # 是： easy to match operators with operands
@@ -134,15 +131,8 @@ income = (gross_wages
 
 总之，空行的作用就是隔离不同函数类等，使层次分明。
 
-<h3 id="3.6">源文件编码</h3>
 
-Python 2 默认ASCII，Python 3 默认UTF-8。
-
-使用 ASCII 的 Python 2 源文件或使用 UTF-8 的 Python 3 源文件不应该有编码声明。
-
-源文件最好只使用 ASCII 字符，即使是蹩脚的 Chinglish 亦可，家和万事兴。
-
-<h3 id="3.7">模块导入</h3>
+<h3 id="3.6">模块导入</h3>
 
 ```Python
 是：
@@ -177,50 +167,6 @@ from . import sibling
 from .sibling import example
 ```
 
-在 Python 3 中，相对导入已经被删除，禁止使用。
-
-类导入：
-
-```Python
-from myclass import MyClass
-from foo.bar.yourclass import YourClass
-```
-
-如果这种方式导致了本地命名冲突，可以使用以下方式：
-
-```Python
-import myclass
-import foo.bar.yourclass
-```
-
-然后使用 myclass.MyClass 和 foo.bar.yourclass.YourClass。
-
-请不要使用以下方式：
-
-```Python
-from <module> import *
-```
-
-<h3 id="3.8">模块级别 dunder 名称</h3>
-
-模块级别 “dunders”(即具有两个前导和两个后缀下划线的名称)，例如 \_\_all\_\_，\_\_author\_\_，\_\_version\_\_ 等应放在模块 docstring 之后，但在任何 import 语句之前，但是除了 \_\_future\_\_ 导入。 Python 强制 future-imports 必须在除了 docstrings 之外的任何其他代码之前出现在模块中。  
-例如：
-
-```Python
-"""This is the example module.
-
-This module does stuff.
-"""
-
-from __future__ import barry_as_FLUFL
-
-__all__ = ['a', 'b', 'c']
-__version__ = '0.1'
-__author__ = 'Cardinal Biggles'
-
-import os
-import sys
-```
 
 <h2 id="4">字符串引号</h2>
 
@@ -762,8 +708,8 @@ if isinstance(obj, basestring):
       if greeting:
 否：
       if greeting == True:
-虾扯蛋：
+      
       if greeting is True:
 ```
 
-## 别扯了，再扯蛋都碎了 。=_=# 
+
