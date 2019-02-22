@@ -397,7 +397,7 @@ Tkinter.Toplevel(master, class_='ClassName')
 
 <h4 id="8.3.1">避免的命名</h4>
 
-一定不要使用 l(唉欧儿) O(偶) I(艾) 作为单字符变量命名，在某些字体中，这些字母和数字 1 0 无法区分。
+一定不要使用 l， O， I， 作为单字符变量命名，在某些字体中，这些字母和数字 1 0 无法区分。
 
 <h4 id="8.3.2">包和模块名</h4>
 
@@ -459,8 +459,6 @@ KT_contra = TypeVar('KT_contra', contravariant=True)
 
     if not foo is None:
 ```
-
-
 
 * 使用 def 语句而不要使用赋值语句去直接绑定一个 lambda 表达式到标识符上：
 
@@ -544,14 +542,6 @@ KT_contra = TypeVar('KT_contra', contravariant=True)
         return math.sqrt(x)
 ```
 
-* 相对于 string 模块，使用 string 方法要快的多并且与 unicode strings 共享相同的 API。当然了，除了需要考虑 2.0 版本之前 python 代码向后兼容性的情况。
-
-* 使用 ''.startswith() 和 ''.endswith() 而不是字符串切片来检查前缀或后缀，例如：
-
-```python
-是： if foo.startswith('bar'):
-否： if foo[:3] == 'bar':
-```
 
 
 * 对于序列（字符串，列表，元组）的判空操作：
