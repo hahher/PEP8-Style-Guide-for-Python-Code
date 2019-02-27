@@ -1,9 +1,9 @@
 # Python 编码风格
 
 
-<h2 id="3">pe</h2>
+<h2 id="3">编码规范</h2>
 
-<h3 id="3.1">PEP 8 规范</h3>
+<h3 id="3.1"> PEP8 规范</h3>
 
 [PEP 8 链接](https://www.python.org/dev/peps/pep-0008/ "With a Title")
 
