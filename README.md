@@ -4,7 +4,7 @@
 <h2 id="3">pe</h2>
 
 <h3 id="3.1">PEP 8 规范</h3>
-[PEP 8 链接](https://www.python.org/dev/peps/pep-0008/ "With a Title")
+the [PEP 8 链接](https://www.python.org/dev/peps/pep-0008/ "With a Title")
 参考 PEP 8 编码规范 这么不在重复
 
 
