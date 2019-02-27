@@ -9,172 +9,88 @@
 
 具体 参考 PEP 8 编码规范 这里不在重复
 
-
-
-
 * 静态检查 工具。
 1. Pylint
 2. Flake8
 3. pytest
 
+pychar vscode 可安装以上插件，检查编写是否规范
 
-```Python
-
-是：
-
-# 括号内隐式连接，垂直对齐
-foo = long_function_name(var_one, var_two,
-                         var_three, var_four)
-
-# 悬挂缩进，进一步缩进区分其他语句
-def long_function_name(
-        var_one, var_two, var_three,
-        var_four):
-    print(var_one)
-
-# 悬挂缩进，一般是四个空格，但非必须
-foo = long_function_name(
-    var_one, var_two,
-    var_three, var_four)
-
-否：
-
-# 括号内隐式连接，没有垂直对齐时，第一行的参数被禁止
-foo = long_function_name(var_one, var_two,
-    var_three, var_four)
-
-# 悬挂缩进，需要进一步的缩进区分其他行
-def long_function_name(
-    var_one, var_two, var_three,
-    var_four):
-    print(var_one)
-```
-
-* 当 if 语句过长时，可选的处理方式，但不限于此：
-
-```python
-# 不使用额外缩进
-if (this_is_one_thing and
-    that_is_another_thing):
-    do_something()
-
-# 增加注释区分，支持语法高亮
-if (this_is_one_thing and
-    that_is_another_thing):
-    # Since both conditions are true, we can frobnicate.
-    do_something()
-    
-# 条件连续行额外缩进
-if (this_is_one_thing
-        and that_is_another_thing):
-    do_something()
-```
-
-* 当闭环括号内元素跨行时，可以采用以下方式。
-
-```Python
-my_list = [
-    1, 2, 3,
-    4, 5, 6,
-    ]
-result = some_function_that_takes_arguments(
-    'a', 'b', 'c',
-    'd', 'e', 'f',
-    )
-```
-或者
-```python
-my_list = [
-    1, 2, 3,
-    4, 5, 6,
-]
-result = some_function_that_takes_arguments(
-    'a', 'b', 'c',
-    'd', 'e', 'f',
-)
-```
 
 <h3 id="3.2"> tab 和 space </h3>
 
-一个缩进级别四个空格。禁用
+一个缩进级别四个空格。禁用 tab 
 
-Python 3 不允许 tab 和 space 混用，同时混用了 tab 和 space 的 Python 2 代码应该被转换为仅使用 space。  
+Python 3 不允许 tab 和 space 混用，  
 
-<h3 id="3.3">代码行最大长度</h3>
+<h3 id="3.3">变量命名</h3>
 
-将所有行限制为最多79个字符。
+参考 PEP 8 编码规范
+
+不要使用 l， O， I， 作为单字符变量命名，在某些字体中，这些字母和数字 1 0 无法区分
+
+变量和硬编码 要有注释，包括对其功能、取值范围、注意事项等的说明
 
 
-反斜杠有时可能仍然要用。 例如，又多又长的 with - 语句不能使用隐式连接，这时反斜杠是可以接受的：
+<h3 id="3.6">行注释</h3>
 
+分支语句（条件分支、循环语句等）必须编写注释 描述功能而不是描述代码 
+
+
+
+<h2 id="4">代码抽象性</h2>
+
+注意代码抽象，不要一个函数写完所以功能，
+
+推荐示例
 ```Python
-with open('/path/to/some/file/you/want/to/read') as file_1, \
-     open('/path/to/some/file/being/written', 'w') as file_2:
-    file_2.write(file_1.read())
-```
 
-assert 语句也是如此。
+from random import randint
 
-<h3 id="3.4">在二元运算符之前还是之后断行?</h3>
+def main():
+    # 随机生成 10 组大小各异的数组并排序
+    for i in range(10):
+        # step 1. get random array
+        arr = get_random_array()
+        
+        # step 2. print original array
+        print('原数组', end='：')
+        print_array(arr)
+        
+        # step 3. bubble sort
+        bubble_sort(arr)
+        
+        # step 4. print sorted array
+        print('排序后', end='：')
+        print_array(arr)
+        
+        print()
+    
+def get_random_array():
+    ''' 得到随机大小的随机数组 '''
+    size = randint(0, 10)
+    arr = []
+    for i in range(size):
+        arr.append(randint(0, 100) - 50)
+    return arr
 
-推荐使用以下形式：
+def print_array(arr):
+    for i in arr:
+        print(i, end=' ')
+    print()
 
-```Python
-# 是： easy to match operators with operands
-income = (gross_wages
-          + taxable_interest
-          + (dividends - qualified_dividends)
-          - ira_deduction
-          - student_loan_interest)
-```  
-
-只要保持本地一致性，在二元运算符之前和之后断开都是允许的，但是新的 Python 代码推荐使用 Knuth 形式。  
-
-<h3 id="3.5">空行</h3>
-
-顶层函数和类定义间使用两个空行。
-
-类内方法定义间使用一个空行。
-
-不同函数组之间使用两个空行隔离。
-
-总之，空行的作用就是隔离不同函数类等，使层次分明。
-
-
-<h3 id="3.6">模块导入</h3>
-
-```Python
-是：
-    from subprocess import Popen, PIPE
-    import os
-    import sys
-
-否：
-    import sys, os
-```
-
-模块导入总是位于文件顶部，在模块注释和文档字符串之后，模块全局变量和常量之前。
-
-导入应该按照以下顺序分组，不同组间用空行隔离。
-
-* 标准库 imports  
-* 相关第三方 imports  
-* 本地特定应用／库 imports  
-
-推荐使用绝对导入，标准库代码应总是使用绝对导入。
-
-```Python
-import mypkg.sibling
-from mypkg import sibling
-from mypkg.sibling import example
-```
-
-
-<h2 id="4">字符串引号</h2>
-
-在 Python 中，单引号和双引号是等价的，只需要坚持使用一种并保持一致即可。
-
-在双引号中使用单引号，单引号中使用双引号。三引号中使用双引号。
+def bubble_sort(arr):
+    ''' 对指定数组进行冒泡排序（从小到大） '''
+    for i in range(len(arr)):
+        for j in range(len(arr) - i - 1):
+            if arr[j] > arr [j+1]:
+                temp = arr[j]
+                arr[j] = arr[j+1]
+                arr[j+1] = temp
+    
+if __name__ == '__main__':
+    main()
+'''
 
 <h2 id="5">表达式和语句中的空格<h2/>
 
