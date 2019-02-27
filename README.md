@@ -1,9 +1,12 @@
-# Python 代码风格指南
+# Python 编码风格
 
 
-<h2 id="3">代码布局</h2>
+<h2 id="3">pe</h2>
 
-<h3 id="3.1">缩进</h3>
+<h3 id="3.1">PEP 8 规范</h3>
+[PEP 8 链接](https://www.python.org/dev/peps/pep-0008/)
+参考 PEP 8 编码规范 这么不在重复
+
 
 一个缩进级别四个空格。
 
