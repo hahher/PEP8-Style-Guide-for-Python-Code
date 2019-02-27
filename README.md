@@ -7,12 +7,16 @@
 
 [PEP 8 链接](https://www.python.org/dev/peps/pep-0008/ "With a Title")
 
-参考 PEP 8 编码规范 这里不在重复
+具体 参考 PEP 8 编码规范 这里不在重复
 
 
-一个缩进级别四个空格。
 
-* 连续行使用两种方式使封装元素成为一行：括号内垂直隐式连接 & 悬挂式缩进。 使用悬挂式缩进应该注意第一行不应该有参数，连续行要使用进一步的缩进来区分。
+
+* 静态检查 工具。
+1. Pylint
+2. Flake8
+3. pytest
+
 
 ```Python
 
@@ -92,7 +96,7 @@ result = some_function_that_takes_arguments(
 
 <h3 id="3.2"> tab 和 space </h3>
 
-
+一个缩进级别四个空格。禁用
 
 Python 3 不允许 tab 和 space 混用，同时混用了 tab 和 space 的 Python 2 代码应该被转换为仅使用 space。  
 
