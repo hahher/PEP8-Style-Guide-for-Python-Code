@@ -92,52 +92,14 @@ if __name__ == '__main__':
     main()
 '''
 
-<h2 id="5">表达式和语句中的空格<h2/>
+
+<h2 id="5">函数注释<h2/>
+
 
 <h3 id="5.1">在以下场景避免不必要的空格</h3>
 
+
 推荐示例
-
-```Python
-是： spam(ham[1], {eggs: 2})
-否： spam( ham[ 1 ], { eggs: 2 } )
-
-是： foo = (0,)
-否： bar = (0, )
-
-是： if x == 4: print x, y; x, y = y, x
-否： if x == 4 : print x , y ; x , y = y , x
-
-是：
-    ham[1:9], ham[1:9:3], ham[:9:3], ham[1::3], ham[1:9:]
-    ham[lower:upper], ham[lower:upper:], ham[lower::step]
-    ham[lower+offset : upper+offset]
-    ham[: upper_fn(x) : step_fn(x)], ham[:: step_fn(x)]
-    ham[lower + offset : upper + offset]
-
-否：
-    ham[lower + offset:upper + offset]
-    ham[1: 9], ham[1 :9], ham[1:9 :3]
-    ham[lower : : upper]
-    ham[ : upper]
-    
-是： spam(1)
-否： spam (1)
-
-是： dct['key'] = lst[index]
-否： dct ['key'] = lst [index]
-
-是：
-    x = 1
-    y = 2
-    long_variable = 3
-    
-否：
-    x             = 1
-    y             = 2
-    long_variable = 3
-    
-```
 
 <h3 id="5.2">其他建议</h3>
 
